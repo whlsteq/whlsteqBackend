@@ -15,4 +15,6 @@ public class UserBusinessRules {
             throw new BusinessException("This e-mail already exist");
         }
     }
+
+
 }

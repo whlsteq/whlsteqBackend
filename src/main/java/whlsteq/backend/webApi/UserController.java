@@ -14,29 +14,35 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/users")//burasinin kisaca localhost:8080/api/v1/users kismi oldugunu belirtiyoruz.
 public class UserController {
     private UserService userService;
 
 
     @GetMapping("/{id}")
-    public GetByIdUserResponse getById(@PathVariable int id){
+    public GetByIdUserResponse getById(@PathVariable int id) {
         return userService.getById(id);
     }
-    @GetMapping()
-    public List<GetAllUserResponse>getAll(){return userService.getAll();}
 
-//    @CrossOrigin //bu ozellik farkli portlardan yani frontend localhost:5453 te calisiyorsa ve backend localhost:8080 de calisiyorsa ikisi arasinda baglanti olmasina portlar arasinda izin veriyor.
+    @GetMapping()
+    public List<GetAllUserResponse> getAll() {
+        return userService.getAll();
+    }
+
+    //    @CrossOrigin //bu ozellik farkli portlardan yani frontend localhost:5453 te calisiyorsa ve backend localhost:8080 de calisiyorsa ikisi arasinda baglanti olmasina portlar arasinda izin veriyor.
     @PostMapping("/add")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void add(@RequestBody() @Valid CreateUserRequest createUserRequest){
+    public void add(@RequestBody() @Valid CreateUserRequest createUserRequest) {
         this.userService.add(createUserRequest);
     }
+
     @PutMapping()
-    public void update(@RequestBody() UpdateUserRequest updateUserRequest){
+    public void update(@RequestBody() UpdateUserRequest updateUserRequest) {
         this.userService.update(updateUserRequest);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id){this.userService.delete(id);}
+    public void delete(@PathVariable int id) {
+        this.userService.delete(id);
+    }
 }

@@ -1,5 +1,6 @@
 package whlsteq.backend.business.concretes;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import whlsteq.backend.business.abstracts.UserService;
 import whlsteq.backend.business.request.CreateUserRequest;
 import whlsteq.backend.business.request.UpdateUserRequest;
@@ -21,6 +22,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private ModelMapperService modelMapperService;
     private UserBusinessRules userBusinessRules;
+    private BCryptPasswordEncoder passwordEncoder;
+    private AuthenticationServiceImpl authenticationServiceImpl;
 
     @Override
     public List<GetAllUserResponse> getAll() {
@@ -42,6 +45,7 @@ public class UserServiceImpl implements UserService {
     public void add(CreateUserRequest createUserRequest) {
         this.userBusinessRules.checkIfUserEmailExists(createUserRequest.getEmail());
         User user =this.modelMapperService.forRequest().map(createUserRequest, User.class);
+        user.setPassword(passwordEncoder.encode(createUserRequest.getPassword()));
         this.userRepository.save(user);
     }
 
@@ -54,5 +58,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(int id) {
         this.userRepository.deleteById(id);
+    }
+
+    public boolean authenticate(String email, String password){
+        return this.authenticationServiceImpl.authenticate(email, password);
     }
 }
