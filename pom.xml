@@ -15,8 +15,6 @@
     <description>Kodlama io spring</description>
     <properties>
         <java.version>17</java.version>
-        <security.user.name>whlsteq</security.user.name>
-        <security.user.password>281411</security.user.password>
     </properties>
 
     <dependencies>

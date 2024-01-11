@@ -1,5 +1,6 @@
 package whlsteq.backend.business.request;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -11,20 +12,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateUserRequest {
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Name cannot be null")
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Surname cannot be null")
+    @NotBlank(message = "Name cannot be blank")
     private String surname;
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Email cannot be null")
+    @NotBlank(message = "Email cannot be blank")
+    @Email
     private String email;
 
-    @NotNull
-    @NotBlank
-    @Size(min=4,max = 16)
+    @NotNull(message = "Password cannot be null")
+    @NotBlank(message = "Password cannot be blank")
+    @Size(min=8,max = 16)
     private String password;
 }

@@ -32,9 +32,10 @@ public class UserController {
     //    @CrossOrigin //bu ozellik farkli portlardan yani frontend localhost:5453 te calisiyorsa ve backend localhost:8080 de calisiyorsa ikisi arasinda baglanti olmasina portlar arasinda izin veriyor.
     @PostMapping("/add")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public void add(@RequestBody() @Valid CreateUserRequest createUserRequest) {
-        this.userService.add(createUserRequest);
+    public void add(@RequestBody @Valid CreateUserRequest createUserRequest) {
+            this.userService.add(createUserRequest);
     }
+
 
     @PutMapping()
     public void update(@RequestBody() UpdateUserRequest updateUserRequest) {

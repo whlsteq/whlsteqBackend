@@ -1,5 +1,6 @@
 package whlsteq.backend.business.concretes;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import whlsteq.backend.business.abstracts.UserService;
 import whlsteq.backend.business.request.CreateUserRequest;
@@ -23,7 +24,6 @@ public class UserServiceImpl implements UserService {
     private ModelMapperService modelMapperService;
     private UserBusinessRules userBusinessRules;
     private BCryptPasswordEncoder passwordEncoder;
-    private AuthenticationServiceImpl authenticationServiceImpl;
 
     @Override
     public List<GetAllUserResponse> getAll() {
@@ -60,7 +60,4 @@ public class UserServiceImpl implements UserService {
         this.userRepository.deleteById(id);
     }
 
-    public boolean authenticate(String email, String password){
-        return this.authenticationServiceImpl.authenticate(email, password);
-    }
 }
