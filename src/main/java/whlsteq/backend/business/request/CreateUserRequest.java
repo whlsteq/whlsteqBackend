@@ -27,6 +27,6 @@ public class CreateUserRequest {
 
     @NotNull(message = "Password cannot be null")
     @NotBlank(message = "Password cannot be blank")
-    @Size(min=8,max = 16)
+    @Size(min=8,max = 16, message = "Size must be between 8 and 16")
     private String password;
 }
